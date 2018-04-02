@@ -4,7 +4,7 @@ $(document).ready(function() {
   var currentScore = 0;
 
   $(".start-game").click(function() {
-    currentPattern = [];
+    currentPattern = ["red"];
     inputPattern = [];
     currentScore = 0;
     updateAndShowPattern();
@@ -45,28 +45,29 @@ $(document).ready(function() {
         i++;
         if (i >= currentPattern.length) {
           clearInterval(moves);
+          alert("It's your turn!");
+          usersTurn();
         }
       }, 1000);
-      usersTurn();
     }
 
     function usersTurn() {
     $(".box").click(function() {
       switch($(this).css("background-color")) {
         case "rgb(255, 0, 0)":
-          new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3').play();
+          new Audio("sounds/redSound.mp3").play();
           inputPattern.push("red");
           break;
         case "rgb(0, 128, 0)":
-          new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3').play();
+          new Audio("sounds/greenSound.mp3").play();
           inputPattern.push("green");
           break;
         case "rgb(0, 0, 255)":
-          new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3').play();
+          new Audio("sounds/blueSound.mp3").play();
           inputPattern.push("blue");
           break;
         case "rgb(255, 255, 0)":
-          new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3').play();
+          new Audio("sounds/yellowSound.mp3").play();
           inputPattern.push("yellow");
           break;
         default:
