@@ -37,7 +37,7 @@ $(document).ready(function() {
       var i = 0;
       var moves = setInterval(function() {
         var field = currentPattern[i];
-        new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3").play();
+        new Audio("sounds/" + currentPattern[i] + "Sound.mp3").play();
         $("." + field).addClass("active");
         setTimeout(function() {
           $("." + field).removeClass("active");
