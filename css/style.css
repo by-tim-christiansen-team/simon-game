@@ -1,0 +1,48 @@
+body {
+  text-align: center;
+  margin: 100px
+}
+
+.box {
+  height: 150px;
+  width: 150px;
+  margin: 2px;
+  display: inline-block;
+  border-radius: 15px;
+  filter: brightness(100%);
+}
+
+.box:hover {
+  cursor: pointer;
+}
+
+
+.box:active, .active {
+  box-shadow: -3px -3px black;
+  transition: all ease-in 0.025s;
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.green {
+  background-color: green;
+}
+
+.score-counter {
+  font-size: 1.5rem;
+}
+
+.start-game {
+  width: 80px;
+  font-size: 15px;
+}
