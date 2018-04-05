@@ -1,6 +1,10 @@
 body {
   text-align: center;
-  margin: 100px
+  margin: 100px;
+}
+
+.disable-clicks {
+  pointer-events: none;
 }
 
 .box {

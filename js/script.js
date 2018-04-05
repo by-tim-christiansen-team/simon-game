@@ -2,15 +2,16 @@ $(document).ready(function() {
   var currentPattern = [];
   var inputPattern = [];
   var currentScore = 0;
-
+  var clickCounter = -1;
   $(".start-game").click(function() {
-    currentPattern = ["red"];
+    currentPattern = ["red", "blue"];
     inputPattern = [];
     currentScore = 0;
     updateAndShowPattern();
   });
 
   function updateAndShowPattern() {
+    $(".buttons-div").addClass("disable-clicks");
     var btnToAdd;
     var num = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
     switch(num) {
@@ -31,6 +32,7 @@ $(document).ready(function() {
     }
     currentPattern.push(btnToAdd);
     displayPattern();
+
   }
 
   function displayPattern() {
@@ -45,13 +47,13 @@ $(document).ready(function() {
         i++;
         if (i >= currentPattern.length) {
           clearInterval(moves);
-          alert("It's your turn!");
           usersTurn();
         }
       }, 1000);
     }
 
     function usersTurn() {
+    $(".buttons-div").removeClass("disable-clicks");
     $(".box").click(function() {
       switch($(this).css("background-color")) {
         case "rgb(255, 0, 0)":
@@ -73,6 +75,20 @@ $(document).ready(function() {
         default:
           break;
       }
+      clickCounter += 1;
+      if (currentPattern[clickCounter] == inputPattern[clickCounter]) {
+        $(".log").text(currentPattern + " | " + inputPattern);
+      }
+      else {
+        $(".log").text("Fehler gemacht!");
+        $("selector").click(false);
+        return false;
+      }
+      if (inputPattern.length == currentPattern.length) {
+        $(".log").text("GEWONNEN");
+        return true;
+      }
+
     });
   }
 
