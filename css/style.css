@@ -1,6 +1,10 @@
 body {
   text-align: center;
-  margin: 100px
+  margin: 100px;
+}
+
+.disable-clicks {
+  pointer-events: none;
 }
 
 .box {
@@ -18,7 +22,7 @@ body {
 
 
 .box:active, .active {
-  box-shadow: -3px -3px black;
+  box-shadow: -2px -2px grey;
   transition: all ease-in 0.025s;
 }
 

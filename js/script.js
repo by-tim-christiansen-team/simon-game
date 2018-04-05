@@ -2,15 +2,16 @@ $(document).ready(function() {
   var currentPattern = [];
   var inputPattern = [];
   var currentScore = 0;
-
+  var clickCounter = -1;
   $(".start-game").click(function() {
-    currentPattern = [];
+    currentPattern = ["red", "blue"];
     inputPattern = [];
     currentScore = 0;
     updateAndShowPattern();
   });
 
   function updateAndShowPattern() {
+    $(".buttons-div").addClass("disable-clicks");
     var btnToAdd;
     var num = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
     switch(num) {
@@ -31,6 +32,7 @@ $(document).ready(function() {
     }
     currentPattern.push(btnToAdd);
     displayPattern();
+
   }
 
   function displayPattern() {
@@ -45,33 +47,48 @@ $(document).ready(function() {
         i++;
         if (i >= currentPattern.length) {
           clearInterval(moves);
+          usersTurn();
         }
       }, 1000);
-      usersTurn();
     }
 
     function usersTurn() {
+    $(".buttons-div").removeClass("disable-clicks");
     $(".box").click(function() {
       switch($(this).css("background-color")) {
         case "rgb(255, 0, 0)":
-          new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3').play();
+          new Audio("sounds/redSound.mp3").play();
           inputPattern.push("red");
           break;
         case "rgb(0, 128, 0)":
-          new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3').play();
+          new Audio("sounds/greenSound.mp3").play();
           inputPattern.push("green");
           break;
         case "rgb(0, 0, 255)":
-          new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3').play();
+          new Audio("sounds/blueSound.mp3").play();
           inputPattern.push("blue");
           break;
         case "rgb(255, 255, 0)":
-          new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3').play();
+          new Audio("sounds/yellowSound.mp3").play();
           inputPattern.push("yellow");
           break;
         default:
           break;
       }
+      clickCounter += 1;
+      if (currentPattern[clickCounter] == inputPattern[clickCounter]) {
+        $(".log").text(currentPattern + " | " + inputPattern);
+      }
+      else {
+        $(".log").text("Fehler gemacht!");
+        $("selector").click(false);
+        return false;
+      }
+      if (inputPattern.length == currentPattern.length) {
+        $(".log").text("GEWONNEN");
+        return true;
+      }
+
     });
   }
 
