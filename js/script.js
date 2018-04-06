@@ -3,15 +3,26 @@ $(document).ready(function() {
   var inputPattern = [];
   var currentScore = 0;
   var clickCounter = -1;
+  var strictMode = false;
+  usersTurn();
+  console.log("Program running.");
+
+  $(".strict-btn").click(function() {
+    strictMode = !strictMode;
+  });
+
   $(".start-game").click(function() {
     currentPattern = ["red", "blue"];
     inputPattern = [];
     currentScore = 0;
+    clickCounter = -1;
     updateAndShowPattern();
   });
 
   function updateAndShowPattern() {
     $(".buttons-div").addClass("disable-clicks");
+    clickCounter = -1;
+    inputPattern = [];
     var btnToAdd;
     var num = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
     switch(num) {
@@ -32,7 +43,6 @@ $(document).ready(function() {
     }
     currentPattern.push(btnToAdd);
     displayPattern();
-
   }
 
   function displayPattern() {
@@ -47,13 +57,12 @@ $(document).ready(function() {
         i++;
         if (i >= currentPattern.length) {
           clearInterval(moves);
-          usersTurn();
+          $(".buttons-div").removeClass("disable-clicks");
         }
       }, 1000);
     }
 
     function usersTurn() {
-    $(".buttons-div").removeClass("disable-clicks");
     $(".box").click(function() {
       switch($(this).css("background-color")) {
         case "rgb(255, 0, 0)":
@@ -77,16 +86,18 @@ $(document).ready(function() {
       }
       clickCounter += 1;
       if (currentPattern[clickCounter] == inputPattern[clickCounter]) {
-        $(".log").text(currentPattern + " | " + inputPattern);
+        console.log(currentPattern + " | " + inputPattern);
+        if (inputPattern.length == currentPattern.length) {
+          console.log("Game won.");
+          $(".buttons-div").addClass("disable-clicks");
+          updateAndShowPattern();
+          return true;
+        }
       }
       else {
-        $(".log").text("Fehler gemacht!");
-        $("selector").click(false);
-        return false;
-      }
-      if (inputPattern.length == currentPattern.length) {
-        $(".log").text("GEWONNEN");
-        return true;
+        console.log("Game lost." + clickCounter);
+        $(".buttons-div").addClass("disable-clicks");
+
       }
 
     });
