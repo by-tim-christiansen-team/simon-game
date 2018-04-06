@@ -1,10 +1,13 @@
 $(document).ready(function() {
-  var currentPattern = [];
-  var inputPattern = [];
-  var currentScore = 0;
-  var clickCounter = -1;
-  var strictMode = false;
-  usersTurn();
+
+var gameData = {
+  "currentPattern": [],
+  "usersPattern": [],
+  "score": 0,
+  "strictMode": false,
+};
+var userClickIndex = -1;
+  clickFunction();
   console.log("Program running.");
 
   $(".strict-btn").click(function() {
@@ -12,17 +15,18 @@ $(document).ready(function() {
   });
 
   $(".start-game").click(function() {
-    currentPattern = ["red", "blue"];
-    inputPattern = [];
-    currentScore = 0;
-    clickCounter = -1;
+    $(this).text("Reset");
+    gameData.currentPattern = [];
+    gameData.usersPattern = [];
+    gameData.score = 0;
+    userClickIndex = -1;
     updateAndShowPattern();
   });
 
   function updateAndShowPattern() {
-    $(".buttons-div").addClass("disable-clicks");
-    clickCounter = -1;
-    inputPattern = [];
+    $(".buttons-circle").addClass("disable-clicks");
+    userClickIndex = -1;
+    gameData.usersPattern = [];
     var btnToAdd;
     var num = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
     switch(num) {
@@ -41,62 +45,62 @@ $(document).ready(function() {
       default:
         break;
     }
-    currentPattern.push(btnToAdd);
+    gameData.currentPattern.push(btnToAdd);
     displayPattern();
   }
 
   function displayPattern() {
       var i = 0;
       var moves = setInterval(function() {
-        var field = currentPattern[i];
-        new Audio("sounds/" + currentPattern[i] + "Sound.mp3").play();
+        var field = gameData.currentPattern[i];
+        new Audio("sounds/" + gameData.currentPattern[i] + "Sound.mp3").play();
         $("." + field).addClass("active");
         setTimeout(function() {
           $("." + field).removeClass("active");
         }, 600);
         i++;
-        if (i >= currentPattern.length) {
+        if (i >= gameData.currentPattern.length) {
           clearInterval(moves);
-          $(".buttons-div").removeClass("disable-clicks");
+          $(".buttons-circle").removeClass("disable-clicks");
         }
       }, 1000);
     }
 
-    function usersTurn() {
-    $(".box").click(function() {
+    function clickFunction() {
+    $(".quarter-btn").click(function() {
       switch($(this).css("background-color")) {
         case "rgb(255, 0, 0)":
           new Audio("sounds/redSound.mp3").play();
-          inputPattern.push("red");
+          gameData.usersPattern.push("red");
           break;
         case "rgb(0, 128, 0)":
           new Audio("sounds/greenSound.mp3").play();
-          inputPattern.push("green");
+          gameData.usersPattern.push("green");
           break;
         case "rgb(0, 0, 255)":
           new Audio("sounds/blueSound.mp3").play();
-          inputPattern.push("blue");
+          gameData.usersPattern.push("blue");
           break;
         case "rgb(255, 255, 0)":
           new Audio("sounds/yellowSound.mp3").play();
-          inputPattern.push("yellow");
+          gameData.usersPattern.push("yellow");
           break;
         default:
           break;
       }
-      clickCounter += 1;
-      if (currentPattern[clickCounter] == inputPattern[clickCounter]) {
-        console.log(currentPattern + " | " + inputPattern);
-        if (inputPattern.length == currentPattern.length) {
+      userClickIndex += 1;
+      if (gameData.currentPattern[userClickIndex] == gameData.usersPattern[userClickIndex]) {
+        console.log(gameData.currentPattern + " | " + gameData.usersPattern);
+        if (gameData.usersPattern.length == gameData.currentPattern.length) {
           console.log("Game won.");
-          $(".buttons-div").addClass("disable-clicks");
+          $(".buttons-circle").addClass("disable-clicks");
           updateAndShowPattern();
           return true;
         }
       }
       else {
-        console.log("Game lost." + clickCounter);
-        $(".buttons-div").addClass("disable-clicks");
+        console.log("Game lost.");
+        $(".buttons-circle").addClass("disable-clicks");
 
       }
 
