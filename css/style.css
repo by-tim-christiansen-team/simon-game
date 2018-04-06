@@ -7,23 +7,34 @@ body {
   pointer-events: none;
 }
 
-.box {
-  height: 150px;
-  width: 150px;
-  margin: 2px;
-  display: inline-block;
-  border-radius: 15px;
-  filter: brightness(100%);
+.buttons-circle {
+  margin: auto;
+  display: block;
+  padding: 0;
+  width: 300px;
+  height: 300px;
+  border: 1px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
-.box:hover {
+.quarter-btn {
+  filter: brightness(100%);
+  display: inline-block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 150px;
+  height: 150px;
+}
+
+.quarter-btn:hover {
   cursor: pointer;
 }
 
 
-.box:active, .active {
-  box-shadow: -2px -2px grey;
-  transition: all ease-in 0.025s;
+.quarter-btn:active, .active {
+  filter: brightness(50%);
 }
 
 .red {
