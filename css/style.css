@@ -50,3 +50,7 @@ body {
   width: 80px;
   font-size: 15px;
 }
+
+.strict-btn {
+  display: inline-block;
+}
