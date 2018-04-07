@@ -14,6 +14,7 @@ $(document).ready(function() {
   // toggle strict mode
   $(".strict-btn").click(function() {
     gameData.strictMode = !gameData.strictMode;
+    $(".strict-led").toggleClass("led-active");
     console.log(gameData);
   });
 
