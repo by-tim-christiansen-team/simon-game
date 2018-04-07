@@ -13,22 +13,22 @@ $(document).ready(function() {
 
   // toggle strict mode
   $(".strict-btn").click(function() {
-    strictMode = !strictMode;
+    gameData.strictMode = !gameData.strictMode;
+    console.log(gameData);
   });
 
   // setup and start new game on button-click
   $(".start-game").click(function() {
-    $(this).text("Reset");
+    $(this).text("RESET");
     gameData.currentPattern = [];
     gameData.score = 0;
+    $(".score-value").text(gameData.score);
     setupNewRound();
   });
 
   // add one color to pattern
   function setupNewRound() {
     $(".buttons-circle").addClass("disable-clicks");      // disable buttons
-    userClickIndex = -1;                                  // reset clickIndex
-    gameData.usersPattern = [];                           // clear users input
     var newColor;
     var num = Math.floor(Math.random() * (4 - 1 + 1)) + 1;  // generate random number between 1 and 4
     switch(num) {                                           // assign each number to one color
@@ -53,6 +53,8 @@ $(document).ready(function() {
 
   // show the pattern to user
   function displayPattern() {
+    userClickIndex = -1;                                  // reset clickIndex
+    gameData.usersPattern = [];                           // clear users input
     var i = 0;
     var moves = setInterval(function() {
       var field = gameData.currentPattern[i];
@@ -109,10 +111,17 @@ $(document).ready(function() {
         setupNewRound();
       }
     }
-    else {
-      console.log("Game lost.");
+    else {                                                // if input was wrong
+      if(gameData.strictMode) {                           // strictMode activated; end game
+        console.log("Game lost.");
+      }
+      else {
+        displayPattern();
+      }
       $(".buttons-circle").addClass("disable-clicks");      // disable buttons
     }
   }
+
+
 
 });
