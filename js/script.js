@@ -115,17 +115,27 @@ $(document).ready(function() {
           showText($(".won"));
           gameData.currentPattern = [];
           gameData.score = 0;
+          setTimeout(function() {
+            setupNewRound();
+          }, 2000);
         }
-        showText($(".correct"));
-        setTimeout(function() {
-          setupNewRound();
-        }, 1000);
+        else {
+          showText($(".correct"));
+          setTimeout(function() {
+            setupNewRound();
+          }, 1000);
+        }
       }
     }
     else {                                                // if input was wrong
       if(gameData.strictMode) {                           // strictMode activated; end game
         console.log("Game lost.");
         showText($(".lost"));
+        gameData.currentPattern = [];
+        gameData.score = 0;
+        setTimeout(function() {
+          setupNewRound();
+        }, 2000);
       }
       else {
         showText($(".wrong"));
@@ -137,7 +147,7 @@ $(document).ready(function() {
 
   function showText(text) {
     text.fadeIn("slow");
-    text.delay(500).fadeOut("slow");
+    text.delay(600).fadeOut("slow");
   }
 
 });
