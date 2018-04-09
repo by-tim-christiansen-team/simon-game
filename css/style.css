@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|VT323|Oswald');
+@import url('https://fonts.googleapis.com/css?family=VT323|Oswald');
 
 body {
   text-align: center;
   margin: 50px;
+  background-color: rgb(50, 78, 92);
   -webkit-touch-callout: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -35,53 +36,46 @@ body {
 .command-visible {
   transition: all ease 0.5s;
 }
-
-.buttons-circle {
-  border: 6px solid #3a3a3a;
-  background-color: #3a3a3a;
-  margin: auto;
+#circle {
   display: block;
   padding: 0;
-  width: 305px;
-  height: 305px;
+  width: 200px;
+  height: 200px;
+  border: 1px;
   border-radius: 50%;
   overflow: hidden;
 }
-
-.quarter-btn {
-  filter: brightness(100%);
+.interface {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: black;
+  position: relative;
+  margin: 50px
+}
+.quarter {
   display: inline-block;
+  float: left;
   margin: 0;
   padding: 0;
-  width: 144px;
-  height: 144px;
+  width: 100px;
+  height: 100px;
+}
+#q1 {
+  background-color: rgb(247, 57, 85);
 }
 
-.quarter-btn:hover {
-  cursor: pointer;
+#q2 {
+  background-color: rgb(69, 176, 156);
 }
 
-
-.quarter-btn:active, .active {
-  filter: brightness(50%);
+#q3 {
+  background-color: rgb(42, 150, 189);
 }
 
-.red {
-  background-color: red;
+#q4 {
+  background-color: rgb(239, 201, 76);
 }
-
-.blue {
-  background-color: blue;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.green {
-  background-color: green;
-}
-
 .score-counter {
   margin: 10px auto 0px;
   border: 2px solid grey;
