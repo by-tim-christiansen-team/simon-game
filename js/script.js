@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
-// introducing variables
-  var gameData = {                  // storing game information
+  // introducing variables
+  var gameData = {                     // storing game information
     "currentPattern": [],
     "usersPattern": [],
     "score": 0,
     "strictMode": false,
   };
-  var userClickIndex = -1;          // set to -1 so it starts at 0 and currentPattern[userClickIndex] works
-  clickFunction();                  // run once to enable the function
+  var userClickIndex = -1;            // set to -1 so it starts at 0 and currentPattern[userClickIndex] works
+  clickFunction();                    // run once to enable the function
   console.log("Program running.");
 
   // toggle strict mode
@@ -20,20 +20,24 @@ $(document).ready(function() {
 
   // setup and start new game on button-click
   $(".start-game").click(function() {
-    $(this).text("RESET");
-    gameData.currentPattern = [];
-    gameData.score = 17;
-    $(".score-value").text(gameData.score);
-    setupNewRound();
+    $(".new").fadeIn("slow");
+    $(".new").delay(150).fadeOut("slow");
+    setTimeout(function() {
+      $(this).text("RESET");
+      gameData.currentPattern = [];
+      gameData.score = 17;
+      $(".score-value").text(gameData.score);
+      setupNewRound();
+    }, 1200);
   });
 
   // add one color to pattern
   function setupNewRound() {
-    $(".buttons-circle").addClass("disable-clicks");      // disable buttons
-    $(".score-value").text(gameData.score);             // display new score
+    $(".buttons-circle").addClass("disable-clicks");            // disable buttons
+    $(".score-value").text(gameData.score);                     // display new score
     var newColor;
-    var num = Math.floor(Math.random() * (4 - 1 + 1)) + 1;  // generate random number between 1 and 4
-    switch(num) {                                           // assign each number to one color
+    var num = Math.floor(Math.random() * (4 - 1 + 1)) + 1;      // generate random number between 1 and 4
+    switch(num) {                                               // assign each number to one color
       case 1:
         newColor = "red";
         break;
@@ -49,14 +53,14 @@ $(document).ready(function() {
       default:
         break;
     }
-    gameData.currentPattern.push(newColor);                 // add random picked color to the pattern
+    gameData.currentPattern.push(newColor);                     // add random picked color to the pattern
     displayPattern();
   }
 
   // show the pattern to user
   function displayPattern() {
-    userClickIndex = -1;                      // reset clickIndex
-    gameData.usersPattern = [];               // clear users input
+    userClickIndex = -1;                                                        // reset clickIndex
+    gameData.usersPattern = [];                                                 // clear users input
     var i = 0;
     var moves = setInterval(function() {
       var field = gameData.currentPattern[i];
@@ -64,16 +68,16 @@ $(document).ready(function() {
       $("." + field).addClass("active");
       setTimeout(function() {
         $("." + field).removeClass("active");
-      }, 600);
+      }, 400);
       i++;
       if (i >= gameData.currentPattern.length) {
         clearInterval(moves);
-        $(".buttons-circle").removeClass("disable-clicks");     // enable buttons
+        $(".buttons-circle").removeClass("disable-clicks");                     // enable buttons
       }
-    }, 1000);
+    }, 700);
   }
 
-    // play sound effect and push clicked color to usersPattern array
+  // play sound effect and push clicked color to usersPattern array
   function clickFunction() {
     $(".quarter-btn").click(function() {
       switch($(this).css("background-color")) {
@@ -96,58 +100,68 @@ $(document).ready(function() {
         default:
           break;
       }
-      userClickIndex += 1;          // increase click counter by 1
+      userClickIndex += 1;                                  // increase click counter by 1
       validateInput();
     });
   }
 
   // check whether the click fits with the current Pattern or not
   function validateInput() {
-    if (gameData.currentPattern[userClickIndex] == gameData.usersPattern[userClickIndex]) {     // if input was right
+    if (gameData.currentPattern[userClickIndex] == gameData.usersPattern[userClickIndex]) { // if input was right
       console.log(gameData.currentPattern + " | " + gameData.usersPattern);
-      if (gameData.usersPattern.length == gameData.currentPattern.length) {             // if the whole pattern was returned correctly
+      if (gameData.usersPattern.length == gameData.currentPattern.length) { // if the whole pattern was returned correctly
         console.log("Correct input.");
-        $(".buttons-circle").addClass("disable-clicks");          // disable buttons
-        gameData.score += 1;                                  // increase score by 1
+        $(".buttons-circle").addClass("disable-clicks");             // disable buttons
+        gameData.score += 1;                                         // increase score by 1
         if (gameData.score == 20) {
           console.log("Game won!");
           $(".score-value").text(gameData.score);
           showText($(".won"));
+          setTimeout(function() {
+            $(".new").fadeIn("slow");
+            $(".new").delay(150).fadeOut("slow");
+          }, 1500);
           gameData.currentPattern = [];
           gameData.score = 0;
           setTimeout(function() {
             setupNewRound();
-          }, 2000);
+          }, 2500);
         }
         else {
           showText($(".correct"));
           setTimeout(function() {
             setupNewRound();
-          }, 1000);
+          }, 500);
         }
       }
     }
-    else {                                                // if input was wrong
-      if(gameData.strictMode) {                           // strictMode activated; end game
+    else { // if input was wrong
+      if(gameData.strictMode) {                                      // strictMode activated; end game
         console.log("Game lost.");
         showText($(".lost"));
+        setTimeout(function() {
+          $(".new").fadeIn("slow");
+          $(".new").delay(150).fadeOut("slow");
+        }, 1500);
         gameData.currentPattern = [];
         gameData.score = 0;
         setTimeout(function() {
           setupNewRound();
-        }, 2000);
+        }, 2500);
       }
       else {
         showText($(".wrong"));
-        displayPattern();
+        setTimeout(function() {
+          displayPattern();
+        }, 500);
       }
-      $(".buttons-circle").addClass("disable-clicks");      // disable buttons
+      $(".buttons-circle").addClass("disable-clicks");               // disable buttons
     }
   }
 
   function showText(text) {
     text.fadeIn("slow");
-    text.delay(600).fadeOut("slow");
+    text.delay(150).fadeOut("slow");
   }
 
 });
