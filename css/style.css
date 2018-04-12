@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=VT323|Oswald');
+@import url('https://fonts.googleapis.com/css?family=VT323');
 
 body {
   text-align: center;
   margin: 50px;
-  background-color: rgb(50, 78, 92);
+  background-color: rgb(40, 45, 53);
+  color: rgb(40, 45, 53);
   -webkit-touch-callout: none;
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -15,7 +16,6 @@ body {
 #border {
   width: 525px;
   height: 525px;
-  border: 25px solid rgb(40, 45, 53);
   border-radius: 50%;
   background-color: rgb(40, 45, 53);
 }
@@ -26,7 +26,6 @@ body {
   height: 500px;
   border-radius: 50%;
   overflow: hidden;
-  margin: -12.25px -12.25px;
   z-index: 4;
 }
 .quarter {
@@ -38,6 +37,7 @@ body {
   height: 250px;
   position: relative;
   z-index: 0;
+  cursor: pointer;
 }
 #q1 {
   background-color: rgb(247, 57, 85);
@@ -65,6 +65,9 @@ body {
   background-color: rgb(172, 196, 160);
   position: absolute;
   z-index: 3;
+  font-size: 4em;
+  font-family: "VT323";
+  padding-top: 17.5px;
 }
 .interface {
   width: 250px;
@@ -80,7 +83,7 @@ body {
 }
 .lamp{
   position: relative;
-  top: -200px;
+  top: -235px;
   width: 25px;
   height: 25px;
   margin: 0 10px;
@@ -88,95 +91,34 @@ body {
   border-radius: 50%;
   z-index: 5;
 }
-#start{
-  background-color: green;
+#right{
+  background-color: #39c993;
+  opacity:  0.75;
 }
-#pause{
-  background-color: red;
+#fail{
+  background-color: #e63630;
+  opacity:  0.75;
 }
 #strict{
-  background-color: orange;
-}
-.score-counter {
-  margin: 10px auto 0px;
-  border: 2px solid grey;
-  border-radius: 7.5px;
-  width: 50px;
-  font-size: 1.5em;
-  font-family: "VT323";
-  color: #ff3535;
-  background-color: #3a0202;
-}
-
-.counter-text {
-  font-family: "Oswald";
-  font-size: 0.8em;
-  margin: 0;
-}
-
-.btn {
-  margin: 2.5px;
-  width: 60px;
+  background-color: #e39823;
+  opacity:  0.75;
   cursor: pointer;
-  box-shadow : 0px 2px 3px #212121;
-  border: 2px solid grey;
-  border-radius: 7.5px;
-  font-size: 0.8em;
-  font-family: "Oswald";
 }
-
-.btn:active{
-  box-shadow : 0 1px 1px #212121;
+#strict:hover, #strict:active, #strict.active{
+  opacity:  1;
+  transition: all 100ms;
 }
-
-.start-game {
-  background-color: #10a000;
-  color: white;
-}
-
-.strict-wrap {
-  display: inline-block;
-}
-
-.strict-btn {
-  background-color: #fffa00;
-  color: #3a3a3a;
-}
-
-.strict-led {
-  background-color: #3a0202;
-  border: 1px solid grey;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  margin: auto;
-}
-
-.led-active {
-  background-color: #ff3535;
-}
-
-.disable-clicks {
-  pointer-events: none;
-}
-
-.command-line {
-  margin: 0 auto 10px;
-  font-family: "VT323";
-  font-size: 1.75em;
-  text-align: center;
-  width: 200px;
-  height: 1.75em;
-  color: #ff3535;
-  background-color: #3a0202;
-  border: 2px solid grey;
-  border-radius: 7.5px;
-}
-
-.text {
-  display: none;
-}
-
-.command-visible {
-  transition: all ease 0.5s;
-}
+#btn {
+  color: #fafafa;
+  position: absolute;
+  margin: -220px 65px;
+  width: 100px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 30px;
+  font-weight: 200;
+  padding-top: 2.5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: rgb(40, 45, 53);
