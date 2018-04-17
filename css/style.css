@@ -13,6 +13,14 @@ body {
             user-select: none;
 }
 
+.active {
+  filter: brightness(70%);
+}
+
+.disable-clicks {
+  pointer-events: none;
+}
+
 #border {
   width: 525px;
   height: 525px;
@@ -39,19 +47,24 @@ body {
   z-index: 0;
   cursor: pointer;
 }
-#q1 {
+
+.quarter:active {
+  filter: brightness(70%);
+}
+
+#red {
   background-color: rgb(247, 57, 85);
 }
 
-#q2 {
+#green {
   background-color: rgb(69, 176, 156);
 }
 
-#q3 {
+#blue {
   background-color: rgb(42, 150, 189);
 }
 
-#q4 {
+#yellow {
   background-color: rgb(239, 201, 76);
 }
 .counter{
@@ -90,6 +103,11 @@ body {
   display: inline-block;
   border-radius: 50%;
   z-index: 5;
+}
+
+.lamp-active {
+  opacity: 1;
+  transition: all 150ms;
 }
 #right{
   background-color: #39c993;
