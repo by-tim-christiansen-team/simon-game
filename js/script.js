@@ -22,7 +22,7 @@ $(document).ready(function() {
   $("#btn").click(function() {
     $(this).text("RESET");
     gameData.currentPattern = [];
-    gameData.score = 17;
+    gameData.score = 0;
     $(".score-value").text(gameData.score);
     setupNewRound();
   });
