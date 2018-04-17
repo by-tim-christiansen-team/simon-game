@@ -12,22 +12,25 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <div class="simon-game-div">
-      <p class="command-line"><span class="correct text">Correct!</span><span class="wrong text">Wrong!</span><span class="won text">Game won!</span><span class="lost text">Game lost!</span><span class="new text">New Game!</span></p>
-    <div class="buttons-circle disable-clicks">
-      <div class="quarter-btn red"></div>
-      <div class="quarter-btn green"></div>
-      <div class="quarter-btn blue"></div>
-      <div class="quarter-btn yellow"></div>
+    <div id="border">
+      <div id="circle">
+        <div class="counter">
+          <span class="score-value">12</span>
+        </div>
+        <div id="red" class="quarter"></div>
+        <div id="green" class="quarter"></div>
+        <div id="blue" class="quarter"></div>
+        <div id="yellow" class="quarter"></div>
+        <div class="interface">
+          <div id="right" class="lamp"></div>
+          <div id="fail" class="lamp"></div>
+          <div id="strict" class="lamp"></div>
+          <div id="btn" class="start">Start</div>
+        </div>
+      </div>
     </div>
-    <div class="score-counter"><span class="score-value">0</span></div>
-    <p class="counter-text">SCORE</p>
-    <div class="btn start-game">START</div>
-    <div class="strict-wrap">
-      <div class="strict-led"></div>
-      <div class="btn strict-btn">STRICT</div>
     </div>
-  </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
